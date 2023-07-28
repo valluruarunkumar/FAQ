@@ -3,9 +3,12 @@ import './index.css';
 
 const UsersList = (props) => {
     console.log(props);
-    const { details } = props
-    const { image, name, role } = details
-    console.log({name})
+    const { details, onDeleteUser } = props
+    const { image, name, role, uniqueNo } = details
+
+    const onDelete = () => {
+        onDeleteUser(uniqueNo)
+    }
 
     return (
         <div className="profile-container">
@@ -13,6 +16,9 @@ const UsersList = (props) => {
             <div className="data">
                 <h2>{name}</h2>
                 <p>{role}</p>
+                <div className="cross-mark" onClick={onDelete}>
+                    &#x2715;
+                </div>
             </div>
         </div>
     );

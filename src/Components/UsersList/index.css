@@ -1,57 +1,72 @@
-
 /* Main container for the user list */
 .user-list-container {
-    width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Heading for the user list */
-  .user-list-container h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  /* Container for each user's profile */
-  .profile-container {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-  }
-  
-  /* User profile image */
-  .image {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
-  }
-  
-  /* User data (name and role) */
-  .data {
-    flex: 1;
-  }
-  
-  /* User name */
-  .data h2 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: 600;
-  }
-  
-  /* User role */
-  .data p {
-    margin: 0;
-    font-size: 14px;
-    color: #777;
-  }
+  width: 350px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-  input{
-    padding: 6px;
-    margin-left: 18%;
-  }
-  
+/* Heading for the user list */
+.user-list-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Container for each user's profile */
+.profile-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+/* User profile image */
+.image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+/* User data (name and role) */
+.data {
+  flex: 1;
+}
+
+/* User name */
+.data h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* User role */
+.data p {
+  margin: 0;
+  font-size: 14px;
+  color: #777;
+}
+
+input {
+  width: 80%;
+  padding: 8px;
+  margin-left: 12%;
+}
+
+.cross-mark {
+  background-color: #0a0b0e;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 90%;
+  position: relative;
+  bottom: 30px;
+}
