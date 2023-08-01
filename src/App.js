@@ -1,69 +1,77 @@
-import React from 'react';
-import './App.css';
-import { Component } from 'react';
-import GoogleSerch from './Components/GoogleSearch';
+import React, { Component } from 'react';
+import './Components/ContactList'
+import ContactList from './Components/ContactList';
+import {v4 as uuidv4} from 'uuid'
+import './index.css'
 
-const initialSearches = [
-  {
-    search: "Price Of etherium"
-  },
-  {
-    search: "Latest trends in AI"
-  },
-  {
-    search: "Latest trends in ML"
-  },
-  {
-    search: "MS Dhoni"
-  },
-  {
-    search: "Ravindra jadeja"
-  },
-  {
-    search: "Jaddu and Mahi"
-  }
-]
+const initialContactsList = [
+    {
+      id: uuidv4(),
+      name: 'Ram',
+      mobileNo: 9999988888,
+      isFavorite: false,
+    },
+    {
+      id: uuidv4(),
+      name: 'Pavan',
+      mobileNo: 8888866666,
+      isFavorite: true,
+    },
+    {
+      id: uuidv4(),
+      name: 'Nikhil',
+      mobileNo: 9999955555,
+      isFavorite: false,
+    },
+  ]
 
-class App extends Component{
-  state={
-    searchInput:"",
-    searches:initialSearches
-    
-  }
-  
-  onChangeSearchInput=(event)=>{
-    this.setState({
-      searchInput: event.target.value
-    })
-  }
+class App extends Component {
+    state={
+        ContactsList:initialContactsList,
+        name:"",
+        mobileNo:"",
+    }
 
-  render(){
-    const {searchInput,searches}=this.state
-    
-    const Results=searches.filter((Eachsearch)=>
-      Eachsearch.search.includes(searchInput)
-    )
+    onAddContact= ( )=>{
+        const {name,mobileNo}=this.state
+        const newContact={
+            id:uuidv4(),
+            name,
+            mobileNo,
+            isFavorite:false
+        }
+        this.setState((prevState)=>({
+            ContactsList:[...prevState.ContactsList,newContact],
+            name:"",
+            mobileNo:""
+        }))
+    }
 
+    onChangeName=event=>{
+        this.setState({name:event.target.value})
+    }
+    onChangeMobileNo=event=>{
+        this.setState({mobileNo:event.target.value})
+    }
 
-    return (
+  render() {
+    return ( 
       <div>
-        <img src="./Google.png"></img>
-        <div cass="search-container">
-          <input type="text" class="search-input" name="q" placeholder="Search Google or Type a URL" onChange={this.onChangeSearchInput} />
-          <button type="submit" class="search-button">Search</button>
+        <div className='main-heading'>
+            <h1 className='heading'>Contacts</h1>
+            <input type='text' placeholder='Name' onChange={this.onChangeName}/>
+            <input type='text' placeholder='Number' onChange={this.onChangeMobileNo} />
+            <button onClick={this.onAddContact}>ADD</button>
         </div>
-        <ul>
-          {Results.map((eachSearch) => {
-            return <GoogleSerch searches={eachSearch} />
-          })}
-        </ul>
+        
+        {this.state.ContactsList.map(eachContact=>(
+            <ContactList contacts={eachContact}/>
+        ))}
+        
+      
       </div>
-  
-    )
+    );
   }
-
-  }
-
- 
+};
 
 export default App;
