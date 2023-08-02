@@ -1,77 +1,97 @@
-import React, { Component } from 'react';
-import './Components/ContactList'
-import ContactList from './Components/ContactList';
-import {v4 as uuidv4} from 'uuid'
-import './index.css'
+import React from 'react';
+import { Component } from 'react';
+import Comments from './Components/CommentsApp';
+import {v4 as uuidv4} from 'uuid';
 
-const initialContactsList = [
+const initialComments=[
     {
-      id: uuidv4(),
-      name: 'Ram',
-      mobileNo: 9999988888,
-      isFavorite: false,
+        uniqueId:uuidv4(),
+        image:"download.png",
+        name:"Arun",
+        comment:"It is really good"
     },
     {
-      id: uuidv4(),
-      name: 'Pavan',
-      mobileNo: 8888866666,
-      isFavorite: true,
-    },
-    {
-      id: uuidv4(),
-      name: 'Nikhil',
-      mobileNo: 9999955555,
-      isFavorite: false,
-    },
-  ]
-
-class App extends Component {
-    state={
-        ContactsList:initialContactsList,
-        name:"",
-        mobileNo:"",
+        uniqueId:uuidv4(),
+        image:"download.png",
+        name:"baby",
+        comment:"i am i love with tou Arun "
     }
+]
 
-    onAddContact= ( )=>{
-        const {name,mobileNo}=this.state
-        const newContact={
-            id:uuidv4(),
+
+class CommentsApp extends Component {
+
+
+
+    state={finalComments:initialComments,
+        name:"",
+        comment:""
+        }
+
+
+
+
+    onAddComment=(event)=>{
+        event.preventDefault()
+        const {name,comment}=this.state
+        const newComment={
+            image:"download.png",
             name,
-            mobileNo,
-            isFavorite:false
+            comment
         }
         this.setState((prevState)=>({
-            ContactsList:[...prevState.ContactsList,newContact],
-            name:"",
-            mobileNo:""
-        }))
-    }
+            finalComments:[...prevState.finalComments,newComment],
+                
+        }),
 
-    onChangeName=event=>{
+        ()=>{
+            this.setState({name:'',comment:''})
+        }
+    );
+    
+    };
+
+
+    onDeleteComment=(uniqueId)=>{
+        this.setState((prevState)=>({
+            finalComments:prevState.finalComments.filter(
+                (comments)=>comments.uniqueId!==uniqueId
+            ),
+        }));
+    };
+
+
+    onNameChange =(event) =>{
         this.setState({name:event.target.value})
     }
-    onChangeMobileNo=event=>{
-        this.setState({mobileNo:event.target.value})
+
+    onCommentChange =(event)=>{
+        this.setState({comment:event.target.value})
     }
+    
 
-  render() {
-    return ( 
-      <div>
-        <div className='main-heading'>
-            <h1 className='heading'>Contacts</h1>
-            <input type='text' placeholder='Name' onChange={this.onChangeName}/>
-            <input type='text' placeholder='Number' onChange={this.onChangeMobileNo} />
-            <button onClick={this.onAddContact}>ADD</button>
-        </div>
         
-        {this.state.ContactsList.map(eachContact=>(
-            <ContactList contacts={eachContact}/>
-        ))}
-        
-      
-      </div>
-    );
-  }
-};
+    render() {
+        const commentCount = this.state.finalComments.length;
+        return (
+            <div className='container'>
+                <div className='form-container'>
+                    <h1>Comments</h1>
+                    <form>
+                        <h3>Say something about 4.O Technologies</h3>
+                        <input type="text" placeholder="Your Name" onChange={this.onNameChange} />
+                        <textarea placeholder="Your Comment" onChange={this.onCommentChange}></textarea>
+                        <button onClick={this.onAddComment}>Add Comment</button>
+                    </form>
+                </div>
+                <h2><span>{commentCount}</span>Comment</h2>
+                {this.state.finalComments.map(ecahComment =>(
+                        <Comments  details={ecahComment} onDeleteComment={this.onDeleteComment}/>
+                    ))}
+               
+            </div>
+        )
+    }
+}
 
-export default App;
+export default CommentsApp;
