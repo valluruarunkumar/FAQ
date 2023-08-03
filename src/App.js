@@ -1,35 +1,16 @@
 import React from 'react';
 import { Component } from 'react';
-import Clock from './Components/Clock'
+import FAQ from './Components/FAQ'
 
 
-class ClockApp extends Component {
-    state={showClock:false}
-
-    onToggle=()=>{
-        this.setState(prevState=>{
-            const {showClock}=prevState
-            return{
-                showClock:!showClock,
-            }
-        })
-    }
+class FAQApp extends Component {
+    
 
     render() {
-        const {showClock}=this.state
         return (
-            <div className='container'>
-                <div>
-                    <button className="show-button" onClick={this.onToggle}>
-                       {showClock? "Hide Clock" :'Show Clock'}
-                        </button>
-                    <div className="clock"></div>
-                </div>
-                {showClock && <Clock/>}
-            </div>
-           
+            <FAQ/>
         );
     }
 };
 
-export default ClockApp;
+export default FAQApp;
